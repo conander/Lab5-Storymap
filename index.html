@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Oregon's National Forests</title>
+    <title>Oregon Skiing</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -48,6 +48,7 @@
 
     <!--story map plugin-->
     <script src="js/storymap.2.5.js"></script>
+
 </head>
 <body>
 
@@ -67,7 +68,7 @@
                 </div>
             </section>
             <section data-scene="oregon">
-                <h2>Oregon</h2>
+                <h2>Oregon Skiing</h2>
                 <p>Portland is a seaport and the largest city in the U.S. state of Oregon and the seat of Multnomah
                     County. It is in the Willamette Valley region of the Pacific Northwest, at the confluence of the
                     Willamette and Columbia Rivers. The city covers 145 square miles (380 square kilometers) and had an
@@ -88,8 +89,8 @@
                     the eighth most popular American city, based on where people want to live. </p>
             </section>
 
-            <section data-scene="mthood">
-                <h2>Mt. Hood National Forest</h2>
+            <section data-scene="meadows">
+                <h2>Mt. Hood Meadows</h2>
                 <p>Corvallis is a city in central western Oregon, United States. It is the county seat of Benton County
                     and the principal city of the Corvallis, Oregon Metropolitan Statistical Area, which encompasses all
                     of Benton County. As of the 2010 United States Census, the population was 54,462. Its population was
@@ -111,8 +112,8 @@
                     over.</p>
             </section>
 
-            <section data-scene="willamette">
-                <h2>Willamette National Forest</h2>
+            <section data-scene="timberline">
+                <h2>Timberline Lodge</h2>
                 <p>Eugene is a city of the Pacific Northwest located in the U.S. state of Oregon. It is located at the
                     southern end of the Willamette Valley, near the confluence of the McKenzie and Willamette Rivers,
                     about 50 miles (80 km) east of the Oregon Coast.</p>
@@ -129,8 +130,8 @@
                     Championships.</p>
             </section>
 
-            <section data-scene="ochoco">
-                <h2>Ochoco National Forest</h2>
+            <section data-scene="hoodoo">
+                <h2>Hoodoo Ski Area</h2>
                 <p>Salem is the capital of the U.S. state of Oregon, and the county seat of Marion County. It is located
                     in the center of the Willamette Valley alongside the Willamette River, which runs north through the
                     city. The river forms the boundary between Marion and Polk counties, and the city neighborhood of
@@ -148,8 +149,8 @@
                     Oregon Route 22, which connects West Salem across the Willamette River via the Marion Street and
                     Center Street bridges.</p>
             </section>
-            <section data-scene="deschutes">
-                <h2>Deschutes National Forest</h2>
+            <section data-scene="bachelor">
+                <h2>Mt.Bachelor Ski Resort</h2>
                 <p>Bend is a city in, and the county seat of Deschutes County, Oregon, United States. It is the
                     principal city of the Bend, Oregon Metropolitan Statistical Area. Bend is Central Oregon's largest
                     city, and despite its modest size, is the de facto metropolis of the region, owing to the low
@@ -164,25 +165,6 @@
                     now identified as a gateway for many outdoor sports, including mountain biking, fishing, hiking,
                     camping, rock climbing, white-water rafting, skiing, paragliding and golf. In 2015, Men's Journal
                     ranked Bend as one of The 10 Best Places to Live Now.</p>
-            </section>
-
-            <section data-scene="oregon">
-                <h2>Umpqua National Forest</h2>
-                <p>Oregon was inhabited by many indigenous tribes before Western traders, explorers, and settlers
-                    arrived. An autonomous government was formed in the Oregon Country in 1843 before the Oregon
-                    Territory was created in 1848. Oregon became the 33rd state on February 14, 1859. Today, at 98,000
-                    square miles (255,000 km²), Oregon is the ninth largest and, with a population of 4 million, 27th
-                    most populous U.S. state. The capital of Oregon is Salem, the second most populous of its cities,
-                    with 164,549 residents. Portland is Oregon's most populous city, with 632,309 residents, and ranks
-                    as the 26th most populous city in the United States. Portland's metro population of 2,389,228 ranks
-                    the 23rd largest metro in the nation. The Willamette Valley in western Oregon is the state's most
-                    densely populated area, home to eight of the ten most populous cities.</p>
-                <img src="../../img/oregon_flag.png" class="img-responsive img-thumbnail" alt="responsive image"
-                     alt-text="the flag of oregon">
-                <p>Oregon's landscape is diverse, with a windswept Pacific coastline; a volcano-studded Cascade Range;
-                    abundant bodies of water in and west of the Cascades; dense evergreen, mixed, and deciduous forests
-                    at lower elevations; and a high desert sprawling across much of its east all the way to the Great
-                    Basin.</p>
             </section>
 
             <section data-scene="end" data-background="../../assets/end.jpg">
@@ -252,8 +234,6 @@
 
     // Create Legend Contents in html format
     var county_legend = '<i style="background: orange; opacity: 0.5"></i><p><b>Counties</b></p>';
-    var forest_legend = '<i style="background: green; opacity: 0.5"></i><p><b>Forest</b></p>';
-    var natforest_legend = '<i style="background: green; opacity: 0.5"></i><p><b>National Forest</b></p>';
 
     // For each layer, the first variable is the layer, the second is the legend. The layer variable can be any kinds of layers that leaflet.js supports.
     // var layers = {
@@ -264,6 +244,7 @@
 
     var layers = {
         ESRI: {layer: L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}')},
+
         counties: {
             layer: L.geoJson.ajax('assets/counties.geojson', {
                 color: 'orange',
@@ -271,43 +252,33 @@
                 opacity: 0.3
             }), legend: county_legend
         },
-        forest: {
-            layer: L.geoJson.ajax('assets/finalornatforest.geojson', {
-                color: 'green',
-                weight:2,
-                opacity: 0.3
-            }), legend: natforest_legend
-        },
-        GEE: {
-            layer: L.tileLayer('http://earthengine.google.org/static/hansen_2013/tree_alpha/{z}/{x}/{y}.png'),
-            legend: forest_legend
-        },
+
         satellite: {
             layer: L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiY29uYW5kZXIiLCJhIjoiY2pzYzdxaW56MDJlbDQzcG5rdHA1YTkwciJ9.E63bFvwIHGHZolwRVAQU0Q', {
                 id: 'mapbox.satellite'
             })
         },
-        cartodb_light: {layer: L.tileLayer('http://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png')}
-    };
+
+        outdoors: {layer: L.tileLayer('https://tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=16949a9999ce402887939f0d224a4bad', {mazZoom: 18})},
+      };
 
     var scenes = {
-        overview: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Cover Page', layers: []},
-        oregon: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Oregon State', layers: [layers.forest]},
-        mthood: {lat: 45.373205, lng: -121.695880, zoom: 9, name: 'Corvallis', layers: [layers.counties, layers.ESRI]},
-        willamette: {lat: 44.107033, lng: -122.184685, zoom: 9, name: 'Eugene', layers: [layers.counties, layers.satellite]},
-        ochoco: {lat: 44.358038, lng: -120.421445, zoom: 9, name: 'Salem', layers: [layers.counties, layers.satellite]},
-        deschutes: {lat: 43.890112, lng: -121.603525, zoom: 9, name: 'Bend', layers: [layers.counties, layers.satellite]},
-        umpqua: {lat: 43.218591, lng: -122.619300, zoom: 12, name: 'The End'},
-        end: {lat: 44.0000000, lng: -123.5000000, zoom: 7, name: 'Oregon State', layers: [layers.GEE]},
+        overview: {lat: 44.0000000, lng: -123.5000000, zoom: 8, name: 'Cover Page', layers: []},
+        oregon: {lat: 44.318785, lng: -122.907967, zoom: 8, name: 'Oregon State', layers: [layers.counties, layers.outdoors]},
+        meadows: {lat: 45.331831, lng: -121.665244, zoom: 15, name: 'Meadows', layers: [layers.outdoors]},
+        timberline: {lat: 45.331212, lng: -121.711229, zoom: 15, name: 'Timberline', layers: [layers.outdoors]},
+        hoodoo: {lat: 44.408759, lng: -121.871397, zoom: 15, name: 'Hoodoo', layers: [layers.outdoors]},
+        bachelor: {lat: 44.002803, lng: -121.679057, zoom: 14, name: 'Bachelor', layers: [layers.outdoors]},
+        end: {lat: 44.318785, lng: -122.907967, zoom: 8, name: 'The End', layers: [layers.satellite]}
     };
 
     $('#storymap').storymap({
         scenes: scenes,
-        baselayer: layers.cartodb_light,
+        baselayer: layers.outdoors,
         legend: true, // if you do not want a legend feature, you can simply not define the createLegend function.
         credits: "",
         loader: true,
-        scalebar: false,
+        scalebar: true,
         flyo: true,
         navwidget: true,
 
